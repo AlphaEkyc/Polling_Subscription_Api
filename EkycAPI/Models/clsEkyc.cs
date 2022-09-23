@@ -24,5 +24,16 @@ namespace EkycAPI.Models
         
       
     }
+    public class EkycViaOTP
+    {
+        public string uidType { get; set; }
+        public string strAadhaarNo { get; set; }
+
+        public string OTP { get; set; }
+
+        public string txnId { get; set; }
+
+        public string customerId { get; set; }
+    }
 
 }
