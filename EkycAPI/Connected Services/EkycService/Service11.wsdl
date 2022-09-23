@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Service1" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:element name="GetOTPForAuth">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uidType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strAadhaarNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ApplicationtxnId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="customerId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="TerminalId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="UserDetailId" type="xs:long" />
+            <xs:element minOccurs="0" name="vendorId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="vendorPassword" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IPAddress" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetOTPForAuthResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetOTPForAuthResult" nillable="true" type="q1:ArrayOfKeyValueOfstringstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AuthenticationViaOTP">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uidType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="AadhaarNumber" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="OTP" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="TransactionsidOtp" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ApplicationtxnId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="customerId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="TerminalId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="UserDetailId" type="xs:long" />
+            <xs:element minOccurs="0" name="vendorId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="vendorPassword" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IPAddress" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AuthenticationViaOTPResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AuthenticationViaOTPResult" nillable="true" type="q2:ArrayOfKeyValueOfstringstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DemographyAuthentication">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uidType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strAadhaarNumber" nillable="true" type="xs:string" />
+            <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="PidList" nillable="true" type="q3:ArrayOfKeyValueOfstringstring" />
+            <xs:element minOccurs="0" name="PidOptions" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="EkycType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ApplicationtxnId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="customerId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="TerminalId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="UserDetailId" type="xs:long" />
+            <xs:element minOccurs="0" name="vendorId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="vendorPassword" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IPAddress" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DemographyAuthenticationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="DemographyAuthenticationResult" nillable="true" type="q4:ArrayOfKeyValueOfstringstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AuthenticationViaBiometric">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uidType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strAadhaarNumber" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strEncryptedSKey" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="encryptedPID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sha256ofPidXML" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="rdsId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="rdsVer" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="mi" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="mc" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="dpId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="dc" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ci" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strTerminalId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ts" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strTransactionId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ApplicationtxnId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="BiometricType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="customerId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="UserDetailId" type="xs:long" />
+            <xs:element minOccurs="0" name="vendorId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="vendorPassword" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IPAddress" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AuthenticationViaBiometricResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AuthenticationViaBiometricResult" nillable="true" type="q5:ArrayOfKeyValueOfstringstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AuthenticationViaBFD">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uidType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="AadhaarNumber" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strEncryptedSKey" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="encryptedPID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sha256ofPidXML" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="rdsId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="rdsVer" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="mi" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="mc" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="dpId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="dc" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ci" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="TerminalId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ts" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strTransactionId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ApplicationtxnId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="BiometricType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="customerId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="UserDetailId" type="xs:long" />
+            <xs:element minOccurs="0" name="vendorId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="vendorPassword" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IPAddress" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AuthenticationViaBFDResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AuthenticationViaBFDResult" nillable="true" type="q6:ArrayOfKeyValueOfstringstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetOTP">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uidType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strAadhaarNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ApplicationtxnId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="customerId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="TerminalId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="UserDetailId" type="xs:long" />
+            <xs:element minOccurs="0" name="vendorId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="vendorPassword" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IPAddress" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetOTPResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetOTPResult" nillable="true" type="q7:ArrayOfKeyValueOfstringstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="EkycViaOTP">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uidType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strAadhaarNumber" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strOTP" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="TransactionId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ApplicationtxnId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="customerId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="TerminalId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="UserDetailId" type="xs:long" />
+            <xs:element minOccurs="0" name="vendorId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="vendorPassword" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IPAddress" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="EkycViaOTPResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="EkycViaOTPResult" nillable="true" type="q8:ArrayOfKeyValueOfstringstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="EkycViaBiometric">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uidType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strAadhaarNumber" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strEncryptedSKey" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="encryptedPID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sha256ofPidXML" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="rdsId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="rdsVer" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="mi" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="mc" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="dpId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="dc" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ci" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strTerminalId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ts" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="strTransactionId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="ApplicationtxnId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="BiometricType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="customerId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="UserDetailId" type="xs:long" />
+            <xs:element minOccurs="0" name="vendorId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="vendorPassword" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IPAddress" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="EkycViaBiometricResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="EkycViaBiometricResult" nillable="true" type="q9:ArrayOfKeyValueOfstringstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfKeyValueOfstringstring">
+        <xs:annotation>
+          <xs:appinfo>
+            <IsDictionary xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsDictionary>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="KeyValueOfstringstring">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Key" nillable="true" type="xs:string" />
+                <xs:element name="Value" nillable="true" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfKeyValueOfstringstring" nillable="true" type="tns:ArrayOfKeyValueOfstringstring" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IService1_GetOTPForAuth_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOTPForAuth" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOTPForAuth_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOTPForAuthResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AuthenticationViaOTP_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticationViaOTP" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AuthenticationViaOTP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticationViaOTPResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DemographyAuthentication_InputMessage">
+    <wsdl:part name="parameters" element="tns:DemographyAuthentication" />
+  </wsdl:message>
+  <wsdl:message name="IService1_DemographyAuthentication_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DemographyAuthenticationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AuthenticationViaBiometric_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticationViaBiometric" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AuthenticationViaBiometric_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticationViaBiometricResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AuthenticationViaBFD_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticationViaBFD" />
+  </wsdl:message>
+  <wsdl:message name="IService1_AuthenticationViaBFD_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticationViaBFDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOTP_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOTP" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetOTP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOTPResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_EkycViaOTP_InputMessage">
+    <wsdl:part name="parameters" element="tns:EkycViaOTP" />
+  </wsdl:message>
+  <wsdl:message name="IService1_EkycViaOTP_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EkycViaOTPResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_EkycViaBiometric_InputMessage">
+    <wsdl:part name="parameters" element="tns:EkycViaBiometric" />
+  </wsdl:message>
+  <wsdl:message name="IService1_EkycViaBiometric_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EkycViaBiometricResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IService1">
+    <wsdl:operation name="GetOTPForAuth">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOTPForAuth" message="tns:IService1_GetOTPForAuth_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOTPForAuthResponse" message="tns:IService1_GetOTPForAuth_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticationViaOTP">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AuthenticationViaOTP" message="tns:IService1_AuthenticationViaOTP_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AuthenticationViaOTPResponse" message="tns:IService1_AuthenticationViaOTP_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DemographyAuthentication">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/DemographyAuthentication" message="tns:IService1_DemographyAuthentication_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/DemographyAuthenticationResponse" message="tns:IService1_DemographyAuthentication_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticationViaBiometric">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AuthenticationViaBiometric" message="tns:IService1_AuthenticationViaBiometric_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AuthenticationViaBiometricResponse" message="tns:IService1_AuthenticationViaBiometric_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticationViaBFD">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/AuthenticationViaBFD" message="tns:IService1_AuthenticationViaBFD_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/AuthenticationViaBFDResponse" message="tns:IService1_AuthenticationViaBFD_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOTP">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetOTP" message="tns:IService1_GetOTP_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetOTPResponse" message="tns:IService1_GetOTP_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EkycViaOTP">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/EkycViaOTP" message="tns:IService1_EkycViaOTP_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/EkycViaOTPResponse" message="tns:IService1_EkycViaOTP_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EkycViaBiometric">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/EkycViaBiometric" message="tns:IService1_EkycViaBiometric_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/EkycViaBiometricResponse" message="tns:IService1_EkycViaBiometric_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IService1" type="tns:IService1">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetOTPForAuth">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetOTPForAuth" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticationViaOTP">
+      <soap:operation soapAction="http://tempuri.org/IService1/AuthenticationViaOTP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DemographyAuthentication">
+      <soap:operation soapAction="http://tempuri.org/IService1/DemographyAuthentication" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticationViaBiometric">
+      <soap:operation soapAction="http://tempuri.org/IService1/AuthenticationViaBiometric" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticationViaBFD">
+      <soap:operation soapAction="http://tempuri.org/IService1/AuthenticationViaBFD" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOTP">
+      <soap:operation soapAction="http://tempuri.org/IService1/GetOTP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EkycViaOTP">
+      <soap:operation soapAction="http://tempuri.org/IService1/EkycViaOTP" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EkycViaBiometric">
+      <soap:operation soapAction="http://tempuri.org/IService1/EkycViaBiometric" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Service1">
+    <wsdl:port name="BasicHttpBinding_IService1" binding="tns:BasicHttpBinding_IService1">
+      <soap:address location="http://api.indofinnet.com/Ekyc_Service/EKYCTrasactionMultitaskingService.Service1.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
