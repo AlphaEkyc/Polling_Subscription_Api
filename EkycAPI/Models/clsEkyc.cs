@@ -36,4 +36,27 @@ namespace EkycAPI.Models
         public string customerId { get; set; }
     }
 
+    public class EkycViaBiometric
+    {
+        public string uidType { get; set; }
+        public string strAadhaarNo { get; set; }
+        public string strEncryptedSKey { get; set; }
+        public string encryptedPID { get; set; }
+        public string sha256ofPidXML { get; set; }
+        public string rdsId { get; set; }
+        public string rdsVer { get; set; }
+        public string mi { get; set; }
+        public string mc { get; set; }
+        public string dpid { get; set; }
+        public string dc { get; set; }
+        public string ci { get; set; }
+        public string strTerminalId { get; set; }
+        public string ts { get; set; }
+        public string strTransactionId { get; set; }
+        public string BiometricType { get; set; }
+        public string customerId { get; set; }
+
+       
+    }
+
 }
