@@ -277,7 +277,7 @@ namespace EkycAPI.Controllers
 
 
         [HttpPost]
-        [Route("api/Ekyc/Biometric")]
+        [Route("api/Ekyc/EkycViaBiometric")]
         public HttpResponseMessage EkycViaBiometric(JObject EkycViaBiometricRequest)
         {
             EkycService.Service1Client objser = new EkycService.Service1Client();
