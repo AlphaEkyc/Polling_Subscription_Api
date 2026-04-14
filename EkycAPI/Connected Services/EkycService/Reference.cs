@@ -16,22 +16,22 @@ namespace EkycAPI.EkycService {
     public interface IService1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOTPForAuth", ReplyAction="http://tempuri.org/IService1/GetOTPForAuthResponse")]
-        System.Collections.Generic.Dictionary<string, string> GetOTPForAuth(string uidType, string strAadhaarNo, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress);
+        System.Collections.Generic.Dictionary<string, string> GetOTPForAuth(string uidType, string strAadhaarNo, string strTransactionId, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOTPForAuth", ReplyAction="http://tempuri.org/IService1/GetOTPForAuthResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> GetOTPForAuthAsync(string uidType, string strAadhaarNo, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress);
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> GetOTPForAuthAsync(string uidType, string strAadhaarNo, string strTransactionId, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AuthenticationViaOTP", ReplyAction="http://tempuri.org/IService1/AuthenticationViaOTPResponse")]
-        System.Collections.Generic.Dictionary<string, string> AuthenticationViaOTP(string uidType, string AadhaarNumber, string OTP, string TransactionsidOtp, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress);
+        System.Collections.Generic.Dictionary<string, string> AuthenticationViaOTP(string uidType, string AadhaarNumber, string OTP, string TransactionsidOtp, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AuthenticationViaOTP", ReplyAction="http://tempuri.org/IService1/AuthenticationViaOTPResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> AuthenticationViaOTPAsync(string uidType, string AadhaarNumber, string OTP, string TransactionsidOtp, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress);
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> AuthenticationViaOTPAsync(string uidType, string AadhaarNumber, string OTP, string TransactionsidOtp, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DemographyAuthentication", ReplyAction="http://tempuri.org/IService1/DemographyAuthenticationResponse")]
-        System.Collections.Generic.Dictionary<string, string> DemographyAuthentication(string uidType, string strAadhaarNumber, System.Collections.Generic.Dictionary<string, string> PidList, string PidOptions, string EkycType, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress);
+        System.Collections.Generic.Dictionary<string, string> DemographyAuthentication(string uidType, string strAadhaarNumber, System.Collections.Generic.Dictionary<string, string> PidList, string PidOptions, string EkycType, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/DemographyAuthentication", ReplyAction="http://tempuri.org/IService1/DemographyAuthenticationResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> DemographyAuthenticationAsync(string uidType, string strAadhaarNumber, System.Collections.Generic.Dictionary<string, string> PidList, string PidOptions, string EkycType, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress);
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> DemographyAuthenticationAsync(string uidType, string strAadhaarNumber, System.Collections.Generic.Dictionary<string, string> PidList, string PidOptions, string EkycType, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/AuthenticationViaBiometric", ReplyAction="http://tempuri.org/IService1/AuthenticationViaBiometricResponse")]
         System.Collections.Generic.Dictionary<string, string> AuthenticationViaBiometric(
@@ -53,7 +53,7 @@ namespace EkycAPI.EkycService {
                     string ApplicationtxnId, 
                     string BiometricType, 
                     string customerId, 
-                    long UserDetailId, 
+                    string UserDetailId, 
                     string vendorId, 
                     string vendorPassword, 
                     string IPAddress);
@@ -78,7 +78,7 @@ namespace EkycAPI.EkycService {
                     string ApplicationtxnId, 
                     string BiometricType, 
                     string customerId, 
-                    long UserDetailId, 
+                    string UserDetailId, 
                     string vendorId, 
                     string vendorPassword, 
                     string IPAddress);
@@ -103,7 +103,7 @@ namespace EkycAPI.EkycService {
                     string ApplicationtxnId, 
                     string BiometricType, 
                     string customerId, 
-                    long UserDetailId, 
+                    string UserDetailId, 
                     string vendorId, 
                     string vendorPassword, 
                     string IPAddress);
@@ -128,22 +128,22 @@ namespace EkycAPI.EkycService {
                     string ApplicationtxnId, 
                     string BiometricType, 
                     string customerId, 
-                    long UserDetailId, 
+                    string UserDetailId, 
                     string vendorId, 
                     string vendorPassword, 
                     string IPAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOTP", ReplyAction="http://tempuri.org/IService1/GetOTPResponse")]
-        System.Collections.Generic.Dictionary<string, string> GetOTP(string uidType, string strAadhaarNo, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress);
+        System.Collections.Generic.Dictionary<string, string> GetOTP(string uidType, string strAadhaarNo, string strTransactionId, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetOTP", ReplyAction="http://tempuri.org/IService1/GetOTPResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> GetOTPAsync(string uidType, string strAadhaarNo, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress);
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> GetOTPAsync(string uidType, string strAadhaarNo, string strTransactionId, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EkycViaOTP", ReplyAction="http://tempuri.org/IService1/EkycViaOTPResponse")]
-        System.Collections.Generic.Dictionary<string, string> EkycViaOTP(string uidType, string strAadhaarNumber, string strOTP, string TransactionId, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress);
+        System.Collections.Generic.Dictionary<string, string> EkycViaOTP(string uidType, string strAadhaarNumber, string strOTP, string TransactionId, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EkycViaOTP", ReplyAction="http://tempuri.org/IService1/EkycViaOTPResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> EkycViaOTPAsync(string uidType, string strAadhaarNumber, string strOTP, string TransactionId, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress);
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> EkycViaOTPAsync(string uidType, string strAadhaarNumber, string strOTP, string TransactionId, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/EkycViaBiometric", ReplyAction="http://tempuri.org/IService1/EkycViaBiometricResponse")]
         System.Collections.Generic.Dictionary<string, string> EkycViaBiometric(
@@ -165,7 +165,8 @@ namespace EkycAPI.EkycService {
                     string ApplicationtxnId, 
                     string BiometricType, 
                     string customerId, 
-                    long UserDetailId, 
+                    string UserDetailId, 
+                    string Consent, 
                     string vendorId, 
                     string vendorPassword, 
                     string IPAddress);
@@ -190,7 +191,8 @@ namespace EkycAPI.EkycService {
                     string ApplicationtxnId, 
                     string BiometricType, 
                     string customerId, 
-                    long UserDetailId, 
+                    string UserDetailId, 
+                    string Consent, 
                     string vendorId, 
                     string vendorPassword, 
                     string IPAddress);
@@ -223,27 +225,27 @@ namespace EkycAPI.EkycService {
                 base(binding, remoteAddress) {
         }
         
-        public System.Collections.Generic.Dictionary<string, string> GetOTPForAuth(string uidType, string strAadhaarNo, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
-            return base.Channel.GetOTPForAuth(uidType, strAadhaarNo, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
+        public System.Collections.Generic.Dictionary<string, string> GetOTPForAuth(string uidType, string strAadhaarNo, string strTransactionId, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
+            return base.Channel.GetOTPForAuth(uidType, strAadhaarNo, strTransactionId, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> GetOTPForAuthAsync(string uidType, string strAadhaarNo, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
-            return base.Channel.GetOTPForAuthAsync(uidType, strAadhaarNo, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> GetOTPForAuthAsync(string uidType, string strAadhaarNo, string strTransactionId, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
+            return base.Channel.GetOTPForAuthAsync(uidType, strAadhaarNo, strTransactionId, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
         }
         
-        public System.Collections.Generic.Dictionary<string, string> AuthenticationViaOTP(string uidType, string AadhaarNumber, string OTP, string TransactionsidOtp, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
+        public System.Collections.Generic.Dictionary<string, string> AuthenticationViaOTP(string uidType, string AadhaarNumber, string OTP, string TransactionsidOtp, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
             return base.Channel.AuthenticationViaOTP(uidType, AadhaarNumber, OTP, TransactionsidOtp, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> AuthenticationViaOTPAsync(string uidType, string AadhaarNumber, string OTP, string TransactionsidOtp, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> AuthenticationViaOTPAsync(string uidType, string AadhaarNumber, string OTP, string TransactionsidOtp, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
             return base.Channel.AuthenticationViaOTPAsync(uidType, AadhaarNumber, OTP, TransactionsidOtp, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
         }
         
-        public System.Collections.Generic.Dictionary<string, string> DemographyAuthentication(string uidType, string strAadhaarNumber, System.Collections.Generic.Dictionary<string, string> PidList, string PidOptions, string EkycType, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
+        public System.Collections.Generic.Dictionary<string, string> DemographyAuthentication(string uidType, string strAadhaarNumber, System.Collections.Generic.Dictionary<string, string> PidList, string PidOptions, string EkycType, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
             return base.Channel.DemographyAuthentication(uidType, strAadhaarNumber, PidList, PidOptions, EkycType, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> DemographyAuthenticationAsync(string uidType, string strAadhaarNumber, System.Collections.Generic.Dictionary<string, string> PidList, string PidOptions, string EkycType, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> DemographyAuthenticationAsync(string uidType, string strAadhaarNumber, System.Collections.Generic.Dictionary<string, string> PidList, string PidOptions, string EkycType, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
             return base.Channel.DemographyAuthenticationAsync(uidType, strAadhaarNumber, PidList, PidOptions, EkycType, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
         }
         
@@ -266,7 +268,7 @@ namespace EkycAPI.EkycService {
                     string ApplicationtxnId, 
                     string BiometricType, 
                     string customerId, 
-                    long UserDetailId, 
+                    string UserDetailId, 
                     string vendorId, 
                     string vendorPassword, 
                     string IPAddress) {
@@ -292,7 +294,7 @@ namespace EkycAPI.EkycService {
                     string ApplicationtxnId, 
                     string BiometricType, 
                     string customerId, 
-                    long UserDetailId, 
+                    string UserDetailId, 
                     string vendorId, 
                     string vendorPassword, 
                     string IPAddress) {
@@ -318,7 +320,7 @@ namespace EkycAPI.EkycService {
                     string ApplicationtxnId, 
                     string BiometricType, 
                     string customerId, 
-                    long UserDetailId, 
+                    string UserDetailId, 
                     string vendorId, 
                     string vendorPassword, 
                     string IPAddress) {
@@ -344,26 +346,26 @@ namespace EkycAPI.EkycService {
                     string ApplicationtxnId, 
                     string BiometricType, 
                     string customerId, 
-                    long UserDetailId, 
+                    string UserDetailId, 
                     string vendorId, 
                     string vendorPassword, 
                     string IPAddress) {
             return base.Channel.AuthenticationViaBFDAsync(uidType, AadhaarNumber, strEncryptedSKey, encryptedPID, sha256ofPidXML, rdsId, rdsVer, mi, mc, dpId, dc, ci, TerminalId, ts, strTransactionId, ApplicationtxnId, BiometricType, customerId, UserDetailId, vendorId, vendorPassword, IPAddress);
         }
         
-        public System.Collections.Generic.Dictionary<string, string> GetOTP(string uidType, string strAadhaarNo, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
-            return base.Channel.GetOTP(uidType, strAadhaarNo, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
+        public System.Collections.Generic.Dictionary<string, string> GetOTP(string uidType, string strAadhaarNo, string strTransactionId, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
+            return base.Channel.GetOTP(uidType, strAadhaarNo, strTransactionId, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> GetOTPAsync(string uidType, string strAadhaarNo, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
-            return base.Channel.GetOTPAsync(uidType, strAadhaarNo, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> GetOTPAsync(string uidType, string strAadhaarNo, string strTransactionId, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
+            return base.Channel.GetOTPAsync(uidType, strAadhaarNo, strTransactionId, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
         }
         
-        public System.Collections.Generic.Dictionary<string, string> EkycViaOTP(string uidType, string strAadhaarNumber, string strOTP, string TransactionId, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
+        public System.Collections.Generic.Dictionary<string, string> EkycViaOTP(string uidType, string strAadhaarNumber, string strOTP, string TransactionId, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
             return base.Channel.EkycViaOTP(uidType, strAadhaarNumber, strOTP, TransactionId, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> EkycViaOTPAsync(string uidType, string strAadhaarNumber, string strOTP, string TransactionId, string ApplicationtxnId, string customerId, string TerminalId, long UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> EkycViaOTPAsync(string uidType, string strAadhaarNumber, string strOTP, string TransactionId, string ApplicationtxnId, string customerId, string TerminalId, string UserDetailId, string vendorId, string vendorPassword, string IPAddress) {
             return base.Channel.EkycViaOTPAsync(uidType, strAadhaarNumber, strOTP, TransactionId, ApplicationtxnId, customerId, TerminalId, UserDetailId, vendorId, vendorPassword, IPAddress);
         }
         
@@ -386,11 +388,12 @@ namespace EkycAPI.EkycService {
                     string ApplicationtxnId, 
                     string BiometricType, 
                     string customerId, 
-                    long UserDetailId, 
+                    string UserDetailId, 
+                    string Consent, 
                     string vendorId, 
                     string vendorPassword, 
                     string IPAddress) {
-            return base.Channel.EkycViaBiometric(uidType, strAadhaarNumber, strEncryptedSKey, encryptedPID, sha256ofPidXML, rdsId, rdsVer, mi, mc, dpId, dc, ci, strTerminalId, ts, strTransactionId, ApplicationtxnId, BiometricType, customerId, UserDetailId, vendorId, vendorPassword, IPAddress);
+            return base.Channel.EkycViaBiometric(uidType, strAadhaarNumber, strEncryptedSKey, encryptedPID, sha256ofPidXML, rdsId, rdsVer, mi, mc, dpId, dc, ci, strTerminalId, ts, strTransactionId, ApplicationtxnId, BiometricType, customerId, UserDetailId, Consent, vendorId, vendorPassword, IPAddress);
         }
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> EkycViaBiometricAsync(
@@ -412,11 +415,12 @@ namespace EkycAPI.EkycService {
                     string ApplicationtxnId, 
                     string BiometricType, 
                     string customerId, 
-                    long UserDetailId, 
+                    string UserDetailId, 
+                    string Consent, 
                     string vendorId, 
                     string vendorPassword, 
                     string IPAddress) {
-            return base.Channel.EkycViaBiometricAsync(uidType, strAadhaarNumber, strEncryptedSKey, encryptedPID, sha256ofPidXML, rdsId, rdsVer, mi, mc, dpId, dc, ci, strTerminalId, ts, strTransactionId, ApplicationtxnId, BiometricType, customerId, UserDetailId, vendorId, vendorPassword, IPAddress);
+            return base.Channel.EkycViaBiometricAsync(uidType, strAadhaarNumber, strEncryptedSKey, encryptedPID, sha256ofPidXML, rdsId, rdsVer, mi, mc, dpId, dc, ci, strTerminalId, ts, strTransactionId, ApplicationtxnId, BiometricType, customerId, UserDetailId, Consent, vendorId, vendorPassword, IPAddress);
         }
     }
 }

@@ -21,8 +21,9 @@ namespace EkycAPI.Models
         public string txnId { get; set; }
 
         public string customerId { get; set; }
-        
-      
+        public string UserDetailId { get; set; }
+
+
     }
     public class EkycViaOTP
     {
@@ -34,6 +35,7 @@ namespace EkycAPI.Models
         public string txnId { get; set; }
 
         public string customerId { get; set; }
+        public string UserDetailId { get; set; }
     }
 
     public class EkycViaBiometric
@@ -54,9 +56,21 @@ namespace EkycAPI.Models
         public string ts { get; set; }
         public string strTransactionId { get; set; }
         public string BiometricType { get; set; }
+
+        public string ApplicationtxnId { get; set; }
         public string customerId { get; set; }
 
-       
+        public string UserDetailId { get; set; }
+        public string Consent { get; set; }
+        public string vendorId { get; set; }
+        public string vendorPassword { get; set; }
+        public string IPAddress { get; set; }
+
+
+
+
+
+
     }
 
 }

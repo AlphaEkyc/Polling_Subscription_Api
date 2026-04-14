@@ -19,10 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://api.indofinnet.com/Ekyc_Service/EKYCTrasactionMultitaskingService.Service1.svc?singleWsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost/EKYCTrasactionMultitaskingService/EKYCTrasactionMultitaskingService.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Service11.wsdl" MetadataType="Wsdl" ID="be35a365-0008-4f9f-81bf-bb4d1270ce02" SourceId="1" SourceUrl="http://api.indofinnet.com/Ekyc_Service/EKYCTrasactionMultitaskingService.Service1.svc?singleWsdl" />
+    <MetadataFile FileName="EKYCTrasactionMultitaskingService.xsd" MetadataType="Schema" ID="40c352a2-32e7-47c0-816b-a0220d9f2a3b" SourceId="1" SourceUrl="http://localhost/EKYCTrasactionMultitaskingService/EKYCTrasactionMultitaskingService.svc?xsd=xsd1" />
+    <MetadataFile FileName="Service1.wsdl" MetadataType="Wsdl" ID="20777362-965d-4820-ae48-48be25b9fae4" SourceId="1" SourceUrl="http://localhost/EKYCTrasactionMultitaskingService/EKYCTrasactionMultitaskingService.svc?wsdl" />
+    <MetadataFile FileName="EKYCTrasactionMultitaskingService.disco" MetadataType="Disco" ID="7029dff2-5e0e-4d4c-bfbe-da8c1e1d889c" SourceId="1" SourceUrl="http://localhost/EKYCTrasactionMultitaskingService/EKYCTrasactionMultitaskingService.svc?disco" />
+    <MetadataFile FileName="EKYCTrasactionMultitaskingService2.xsd" MetadataType="Schema" ID="7f97d607-6f84-465a-a89b-c1a164cb874e" SourceId="1" SourceUrl="http://localhost/EKYCTrasactionMultitaskingService/EKYCTrasactionMultitaskingService.svc?xsd=xsd0" />
+    <MetadataFile FileName="EKYCTrasactionMultitaskingService1.xsd" MetadataType="Schema" ID="aa0db2c4-3b39-4330-a85d-cc474ad9540c" SourceId="1" SourceUrl="http://localhost/EKYCTrasactionMultitaskingService/EKYCTrasactionMultitaskingService.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
