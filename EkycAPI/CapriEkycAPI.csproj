@@ -224,6 +224,7 @@
     </Compile>
     <Compile Include="Helper\ApiTraceLogger.cs" />
     <Compile Include="Helper\CryptoGcmHelper.cs" />
+    <Compile Include="Helper\GetErrorCode.cs" />
     <Compile Include="Helper\Parser.cs" />
     <Compile Include="Models\clsEkyc.cs" />
     <Compile Include="Models\PollingInput.cs" />
