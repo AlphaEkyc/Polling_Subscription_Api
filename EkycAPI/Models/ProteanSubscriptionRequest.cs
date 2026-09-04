@@ -72,4 +72,13 @@ namespace AadhaarStatusService.Api.Models.Dto
 
 
     }
+
+    public class UidaiMsg
+    {
+        public string notifyEndpoint { get; set; }
+        public string startDate { get; set; }
+        public string schedule { get; set; }
+    }
+
+
 }

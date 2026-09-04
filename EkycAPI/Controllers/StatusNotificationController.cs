@@ -21,6 +21,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -36,6 +37,7 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Http;
 using System.Web.Http.Results;
 using System.Web.Util;
@@ -59,10 +61,7 @@ namespace EkycAPI.Controllers
             await SubscribeLock.WaitAsync();
             try
             {
-                
-
-
-                var asabase = ConfigurationManager.AppSettings["Uidai.AsaBaseUrl"];
+                //var asabase = ConfigurationManager.AppSettings["Uidai.AsaBaseUrl"];
                 var endpoint = ConfigurationManager.AppSettings["Uidai.SubscriptionEndpoint"];
                 var aua = ConfigurationManager.AppSettings["Uidai.AuaCode"];
                 var subAua = ConfigurationManager.AppSettings["Uidai.SubAuaCode"];
@@ -75,7 +74,7 @@ namespace EkycAPI.Controllers
                 //if (string.IsNullOrEmpty(secret))
                 //    return InternalServerError(new Exception("HMAC secret missing in Web.config"));
                 var msgId = Guid.NewGuid().ToString();
-                var msgTs = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
+                var msgTs = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss.fffZ");
 
                 var debugDir = @"C:\UIDAI_Subscription_Debug";
                 Directory.CreateDirectory(debugDir);
@@ -93,8 +92,8 @@ namespace EkycAPI.Controllers
 
                 Log("===== REQUEST PARAMETERS =====");
 
-                Log($"txnId           : {request.TxnId}");
-                Log($"userId          : {request.UserId}");
+                //Log($"txnId           : {request.TxnId}");
+                //Log($"userId          : {request.UserId}");
                 Log($"notifyEndpoint  : {request.NotifyEndpoint}");
                 Log($"startDate       : {request.StartDate}");
                 Log($"schedule        : {request.Schedule}");
@@ -135,14 +134,31 @@ namespace EkycAPI.Controllers
                 string UserID = request.UserId;
                 string txxnID = request.TxnId;
 
+                UidaiMsg uidaiMsg = new UidaiMsg
+                {
 
-                
+                    notifyEndpoint = request.NotifyEndpoint,
+                    startDate = request.StartDate,
+                    schedule = request.Schedule
+                };
+                Log("===== PAYLOAD DETAILS =====");
                 string headerJsonString = JsonSerializer.Serialize(header);
-                string msgJsonString = JsonSerializer.Serialize(msg);
+                Log("Header JSON:");
+                Log(headerJsonString);
+
+                Log("");
+                string msgJsonString = JsonSerializer.Serialize(uidaiMsg);
+                Log("Message JSON:");
+                Log(msgJsonString);
+
+                Log("");
 
                 string payloadToSign = headerJsonString + msgJsonString;
 
 
+                Log("Payload To Sign:");
+                Log(payloadToSign);
+                Log("");
                 // ---------------- data.signature = HMAC(header + msg) ----------------
                 string dataSignature;
                 using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(license)))
@@ -152,15 +168,20 @@ namespace EkycAPI.Controllers
                     );
                 }
 
+                Log("Payload After sign");
+                Log(dataSignature);
+                Log("");
 
                 var dataObject = new
                 {
-
                     signature = dataSignature,
                     header = header,
-                    msg = msg,
-
+                    msg = uidaiMsg,
                 };
+
+                Log("Creating DataObject with signature , Header and Json");
+                Log(JsonSerializer.Serialize(dataObject));
+                Log("");
 
                 var options = new JsonSerializerOptions
                 {
@@ -171,12 +192,16 @@ namespace EkycAPI.Controllers
                 {
                     data = dataObject
                 };
-
+                Log("");
                 // SERIALIZE ONCE
                 string jsonWithPlaceholder = JsonSerializer.Serialize(requestToSign, options);
 
                 // PREPARE JSON FOR SIGNING (empty outer signature)
+                Log("===== JSON FOR ROOT SIGNATURE =====");
 
+                Log(jsonWithPlaceholder);
+
+                Log("===================================");
 
 
                 byte[] dataBytes = Encoding.UTF8.GetBytes(jsonWithPlaceholder);
@@ -187,6 +212,16 @@ namespace EkycAPI.Controllers
                     signingCertPath,
                     signingCertPassword
                 );
+                Log("===== SIGNATURE DETAILS =====");
+
+               
+
+                Log("");
+
+                Log($"Root Signature:");
+                Log(rootSignature);
+
+                Log("=============================");
 
                 var finalRequestObject = new
                 {
@@ -196,6 +231,15 @@ namespace EkycAPI.Controllers
 
 
                 string finalJson = JsonSerializer.Serialize(finalRequestObject, options);
+
+                Log("===== FINAL REQUEST =====");
+
+                Log($"URL : {endpoint}");
+
+                Log(finalJson);
+
+                Log("=========================");
+
 
                 //string finalJson = JsonSerializer.Serialize(finalRequestObject, options);
 
@@ -210,22 +254,33 @@ namespace EkycAPI.Controllers
                     "{}",
                     "Pending",
                     "Test",
+                    txxnID,
                      UserID,
-                     txxnID);
+                     msgTs);
 
 
                 ServicePointManager.ServerCertificateValidationCallback =
                      (sender, certificate, chain, sslPolicyErrors) => true;
 
+                Log("===== SENDING REQUEST =====");
+
+                Log($"Method : POST");
+                Log($"URL    : {endpoint}");
+
                 using (var client = new HttpClient())
                 {
 
-                    client.Timeout = TimeSpan.FromSeconds(30);
+                    client.Timeout = TimeSpan.FromSeconds(60);
 
 
                     var httpResponse = await client.PostAsync(endpoint, new StringContent(finalJson, Encoding.UTF8, "application/json"));
                     var responseJson = await httpResponse.Content.ReadAsStringAsync();
                     var statusText = httpResponse.IsSuccessStatusCode ? "SUCCESS" : "FAILED";
+                    Log("===== RESPONSE =====");
+
+                 
+
+                   
 
 
                     //var content = new ByteArrayContent(finalRequestBytes); content.Headers.ContentType =
@@ -343,7 +398,7 @@ namespace EkycAPI.Controllers
             return Ok();
         }
 
-        
+
 
         [HttpPost]
         [Route("Polling")]
@@ -386,7 +441,7 @@ namespace EkycAPI.Controllers
                 log.Data("MsgTs", request.MsgTs);
 
                 log.Step("STEP 1 Generate Transaction ID");
-               // string txnId = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff");
+                // string txnId = DateTime.UtcNow.ToString("yyyyMMddHHmmssfff");
                 string txnId = request.TxnId;
                 log.Data("Generated txnId", txnId);
 
@@ -467,7 +522,7 @@ namespace EkycAPI.Controllers
                 string requestSessionKey = Convert.ToBase64String(encryptedSessionKey);
                 log.Data("Encoded requestSession Key with Base64String ", requestSessionKey);
                 log.Data("requestSessionKey Length", requestSessionKey.Length.ToString());
-                 var msgId = Guid.NewGuid().ToString();
+                var msgId = Guid.NewGuid().ToString();
                 var msgts = request.MsgTs;
                 var UserId = request.UserId;
                 // 5. Build Header (single, flat, correct)
@@ -509,7 +564,7 @@ namespace EkycAPI.Controllers
 
 
                 var header = new
-                {
+                { 
                     ver = "1.0",
                     msgId = msgId,
                     msgTs = msgts,
@@ -518,7 +573,6 @@ namespace EkycAPI.Controllers
                     sa = subAua,
                     action = "notify",
                     isMessageEncrypted = true,
-
                 };
 
                 log.Step("STEP 6 Generate DATA Signature");
@@ -527,7 +581,7 @@ namespace EkycAPI.Controllers
 
                 log.Data("Header JSON", dataheaderJson);
                 log.Data("Message JSON", msgJson);
-              
+
 
                 string dataSignature;
                 using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(license)))
@@ -581,14 +635,11 @@ namespace EkycAPI.Controllers
                     data = dataObject,
                     signature = rootSignature
                 };
+               string finalJson = JsonSerializer.Serialize(finalRequest, Options);
 
 
-
-                string finalJson = JsonSerializer.Serialize(finalRequest, Options);
-
-               
                 var key = Convert.ToBase64String(iv);
-                await InsertPollingRequest(txnId, msgId, finalJson, "Pending", "PreProd", Constr, jsonWithRequest, key, requestHmac);
+                await InsertPollingRequest(txnId, msgId, finalJson, "Pending", "PreProd", Constr, jsonWithRequest, key, requestHmac,msgts,UserId);
                 log.Step("STEP 8 Final Request");
                 log.Data("Final JSON sent to ASA", finalJson);
 
@@ -599,7 +650,7 @@ namespace EkycAPI.Controllers
                 using (var client = new HttpClient())
                 {
 
-                    client.Timeout = TimeSpan.FromSeconds(30);
+                    client.Timeout = TimeSpan.FromSeconds(60);
 
                     var httpResponse = await client.PostAsync(PollingEndpoint, new StringContent(finalJson, Encoding.UTF8, "application/json"));
                     var responsejson = await httpResponse.Content.ReadAsStringAsync();
@@ -614,6 +665,42 @@ namespace EkycAPI.Controllers
 
                     if (!root.TryGetProperty("response", out var response))
                         throw new Exception("Invalid ASA response");
+
+
+
+                    if (response.ValueKind == JsonValueKind.String)
+                    {
+                        string errorCode = response.GetString();
+
+                        string respTimestamp = root.TryGetProperty("respTimestamp", out var ts)
+                            ? ts.GetString()
+                            : null;
+
+                        log.Step("UIDAI ERROR RESPONSE");
+                        log.Data("ErrorCode", errorCode);
+                        log.Data("Timestamp", respTimestamp);
+
+                        await UpdatePollingRequest(
+                             Constr,
+                             txnId,
+                             null,                 // decryptedJson
+                             null,                 // message
+                             respTimestamp,
+                                 null,                 // recordPending
+                             "ERROR",
+                             errorCode,
+                                null,                 // exception
+                             responsejson
+                             );
+
+                        return Content(HttpStatusCode.BadRequest, new
+                        {
+                            success = false,
+                            errorCode = errorCode,
+                            message = GetErrorCode.GetErrorMessage(errorCode),
+                            timestamp = respTimestamp
+                        });
+                    }
 
 
                     var respMsg = response.GetProperty("msg");
@@ -685,7 +772,7 @@ namespace EkycAPI.Controllers
 
 
                     // STEP 7: AES-GCM DECRYPT (NO MANUAL TAG SPLIT)
-
+                    
                     var cipher = new GcmBlockCipher(new AesEngine());
 
                     var parameters = new AeadParameters(
@@ -704,17 +791,17 @@ namespace EkycAPI.Controllers
 
                     string decryptedJson = Encoding.UTF8.GetString(output);
                     await UpdatePollingRequest(
-     Constr,
-     txnId,     // ✅ your generated ID
-     decryptedJson,
-     null,
-     null,
-     recordPending,
-     null,
-     null,
-     null,
-     responsejson
- );
+                        Constr,
+                        txnId,     // ✅ your generated ID
+                      decryptedJson,
+                         null,
+                         null,
+                    recordPending,
+                        null,
+                        null,
+                        null,
+                    responsejson
+                      );
                     // STEP 8: RETURN
 
                     return Ok(new
@@ -725,7 +812,7 @@ namespace EkycAPI.Controllers
                         data = decryptedJson
                     });
                     //string connStr,string Response,string Message,string RespTimeStamp,string RecordPending,string Error, string ErrorCode, string Exception,string ResponseJson
-                   
+
                 }
             }
             catch (ConfigurationErrorsException ex)
@@ -740,11 +827,6 @@ namespace EkycAPI.Controllers
 
 
         }
-
-
-
-
-
 
         private static string BuildRequestHmac(string secret, string plainMsgJson)
         {
@@ -762,9 +844,9 @@ namespace EkycAPI.Controllers
 
 
         private static string SignWithDSC(
-     byte[] dataBytes,
-     string certPath,
-     string password)
+            byte[] dataBytes,
+            string certPath,
+            string password)
         {
             var cert = new X509Certificate2(
                 certPath,
@@ -776,7 +858,7 @@ namespace EkycAPI.Controllers
 
             if (!cert.HasPrivateKey)
                 throw new Exception("DSC certificate does not contain a private key");
-
+             
             using (RSA rsa = cert.GetRSAPrivateKey())
             {
 
@@ -797,15 +879,12 @@ namespace EkycAPI.Controllers
                     RSASignaturePadding.Pkcs1
                 );
 
-                string signatureHex = BitConverter
-           .ToString(signature)
-           .Replace("-", "");
+                string signatureHex = BitConverter .ToString(signature).Replace("-", "");
 
                 File.WriteAllText(
                     @"C:\UIDAI_DEBUG\SIGNATURE_RAW_HEX.txt",
                     signatureHex
                 );
-
 
                 return Convert.ToBase64String(signature);
             }
@@ -832,9 +911,11 @@ namespace EkycAPI.Controllers
                string finalJson,
                string dataBlockJson,
                string status,
-             string testOrProd,
-             string txxnId,     // NEW
-    string userId)
+               string testOrProd,
+               string txxnId,     // NEW
+               string userId,
+               string msgts)
+
 
         {
             using (var conn = new SqlConnection(connStr))
@@ -842,11 +923,18 @@ namespace EkycAPI.Controllers
             {
                 cmd.CommandType = CommandType.StoredProcedure;
 
+                DateTimeOffset parsedDate;
+
+                if (!DateTimeOffset.TryParse(msgts, out parsedDate))
+                {
+                    throw new Exception("Invalid msgTs format");
+                }
+
                 var now = DateTime.UtcNow;
                 cmd.Parameters.AddWithValue("@Txnid", txxnId);
                 cmd.Parameters.AddWithValue("@UserId", userId);
                 cmd.Parameters.AddWithValue("@TransactionNo", Guid.NewGuid().ToString("N"));
-                cmd.Parameters.AddWithValue("@TransactionDate", now);
+                cmd.Parameters.AddWithValue("@TransactionDate", parsedDate);
                 cmd.Parameters.AddWithValue("@Version", "1.0.0");
                 cmd.Parameters.AddWithValue("@MsgId", msgId);
                 cmd.Parameters.AddWithValue("@AUACode", ConfigurationManager.AppSettings["Uidai.AuaCode"]);
@@ -934,15 +1022,24 @@ namespace EkycAPI.Controllers
             string connStr,
             string DataJson,
             string Iv,
-            string RequestHmac
-            )
+            string RequestHmac,
+            string msgts,
+            string UserId)
         {
             using (var conn = new SqlConnection(connStr))
             using (var cmd = new SqlCommand("usp_Insert_Status_Polling_Check", conn))
             {
+
+                DateTimeOffset ParsedDate;
+
+                if (!DateTimeOffset.TryParse(msgts, out ParsedDate))
+                {
+                    throw new Exception("Invalid msgTs format");
+                }
+
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@TransactionNo", TransactionNo);
-                cmd.Parameters.AddWithValue("@TransactionDate", DateTime.Now);
+                cmd.Parameters.AddWithValue("@TransactionDate", ParsedDate);
                 cmd.Parameters.AddWithValue("@ApiName", "Polling");
                 cmd.Parameters.AddWithValue("@Server", Environment.MachineName);
                 cmd.Parameters.AddWithValue("@TestOrProduction", "PreProd");
@@ -964,11 +1061,16 @@ namespace EkycAPI.Controllers
                 cmd.Parameters.AddWithValue("@Exception", DBNull.Value);
                 cmd.Parameters.AddWithValue("@CreatedDate", DBNull.Value);
                 cmd.Parameters.AddWithValue("@ResponseJson", DBNull.Value);
+                cmd.Parameters.AddWithValue("@UserId", UserId);
+
 
                 await conn.OpenAsync();
                 await cmd.ExecuteNonQueryAsync();
             }
         }
+
+
+
 
         private static async Task UpdatePollingRequest(
        string connStr,
@@ -981,7 +1083,7 @@ namespace EkycAPI.Controllers
        string errorCode,
        string exception,
        string responseJson
-   )
+        )
         {
             if (string.IsNullOrEmpty(transactionNo))
                 throw new Exception("TransactionNo is required for update");
@@ -991,6 +1093,22 @@ namespace EkycAPI.Controllers
             {
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandTimeout = 120;
+
+                DateTime parsedTimestamp;
+                object dbTimestamp = DBNull.Value;
+
+                if (!string.IsNullOrWhiteSpace(respTimeStamp))
+                {
+                    if (DateTime.TryParseExact(
+                        respTimeStamp,
+                        "yyyy-MM-dd-HH.mm.ss.ffffff",
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.None,
+                        out parsedTimestamp))
+                    {
+                        dbTimestamp = parsedTimestamp;
+                    }
+                }
 
                 // 🔴 MUST MATCH SP PARAM NAMES EXACTLY
                 cmd.Parameters.Add("@TransactionNo", SqlDbType.VarChar, 50).Value = transactionNo;
@@ -1007,11 +1125,14 @@ namespace EkycAPI.Controllers
                 cmd.Parameters.Add("@Error", SqlDbType.NVarChar).Value =
                     (object)error ?? DBNull.Value;
 
-                cmd.Parameters.Add("@RecordPending", SqlDbType.VarChar, 10).Value =
-                    (object)recordPending ?? DBNull.Value;
+                // cmd.Parameters.Add("@RecordPending", SqlDbType.VarChar, 10).Value =
+                //   (object)recordPending ?? DBNull.Value;
+                cmd.Parameters.AddWithValue( "@RecordPending",string.IsNullOrEmpty(recordPending)
+                        ? (object)DBNull.Value: Convert.ToInt32(recordPending));
 
-                cmd.Parameters.Add("@RespTimestamp", SqlDbType.VarChar, 50).Value =
-                    (object)respTimeStamp ?? DBNull.Value;
+                //cmd.Parameters.Add("@RespTimestamp", SqlDbType.VarChar, 50).Value =
+                //    (object)respTimeStamp ?? DBNull.Value;
+                cmd.Parameters.Add("@RespTimestamp", SqlDbType.DateTime2).Value = dbTimestamp;
 
                 cmd.Parameters.Add("@Message", SqlDbType.NVarChar).Value =
                     (object)message ?? DBNull.Value;

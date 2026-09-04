@@ -214,6 +214,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\DeceasedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\EkycController.cs" />
     <Compile Include="Controllers\IActionResult.cs" />
@@ -224,10 +225,16 @@
     </Compile>
     <Compile Include="Helper\ApiTraceLogger.cs" />
     <Compile Include="Helper\CryptoGcmHelper.cs" />
+    <Compile Include="Helper\Encryption.cs" />
+    <Compile Include="Helper\GetErrorCode.cs" />
     <Compile Include="Helper\Parser.cs" />
     <Compile Include="Models\clsEkyc.cs" />
+    <Compile Include="Models\DeceasedResponse.cs" />
+    <Compile Include="Models\PlainResp.cs" />
     <Compile Include="Models\PollingInput.cs" />
     <Compile Include="Models\ProteanSubscriptionRequest.cs" />
+    <Compile Include="Models\Requestdata.cs" />
+    <Compile Include="Models\RequestModel.cs" />
     <Compile Include="Models\SubscriptionResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Interface\IAuditRepository.cs" />
@@ -312,7 +319,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Deceased\" />
     <Folder Include="Views\StatusNotification\" />
+    <Folder Include="Views\Test\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
